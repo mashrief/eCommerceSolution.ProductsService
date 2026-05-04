@@ -1,7 +1,7 @@
 ﻿namespace BusinessLogicLayer.DTO
 {
     public record ProductResponse
-        (Guid productID,
+        (Guid ProductID,
         string? ProductName,
         CategoryOptions Category,
         double? UnitPrice,
