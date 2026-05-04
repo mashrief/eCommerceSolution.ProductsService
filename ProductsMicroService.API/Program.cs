@@ -1,5 +1,6 @@
 using BusinessLogicLayer;
 using DataAccessLayer;
+using FluentValidation.AspNetCore;
 using ProductsMicroService.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDataAccessLayer(builder.Configuration);
 builder.Services.AddBusinessLogicLayer();
 builder.Services.AddControllers();
+builder.Services.AddFluentValidationAutoValidation();
 
 var app = builder.Build();
 
