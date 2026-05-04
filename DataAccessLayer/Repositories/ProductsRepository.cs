@@ -43,9 +43,9 @@ namespace DataAccessLayer.Repositories
             return await _dbContext.Products.ToListAsync();
         }
 
-        public async Task<IEnumerable<Product?>> GetProductsByCondition(Expression<Func<Product, bool>> conditionExpression)
+        public async Task<Product?> GetProductsByCondition(Expression<Func<Product, bool>> conditionExpression)
         {
-            return await _dbContext.Products.Where(conditionExpression).ToListAsync();
+            return await _dbContext.Products.Where(conditionExpression).FirstOrDefaultAsync();
         }
 
         public async Task<Product?> UpdateProduct(Product product)
