@@ -11,8 +11,14 @@ namespace DataAccessLayer
     {
         public static IServiceCollection AddDataAccessLayer(this IServiceCollection services, IConfiguration configuration)
         {
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            connectionString = connectionString?
+                .Replace("$DB_HOST", Environment.GetEnvironmentVariable("DB_HOST"))
+                .Replace("$DB_PASSWORD", Environment.GetEnvironmentVariable("DB_PASSWORD"));
+
             services.AddTransient<IProductsRepository, ProductsRepository>();
-            services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql(connectionString));
 
             return services;
         }
